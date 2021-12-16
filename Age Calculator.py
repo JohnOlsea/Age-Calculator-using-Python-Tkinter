@@ -1,50 +1,47 @@
+from tkinter import *
 import datetime
-import tkinter as tk
-from PIL import Image,ImageTk
-window=tk.Tk()
+
+window = Tk()
+window.title("Age Calculator")
 window.geometry("620x780")
-window.title(" Age Calculator App ")
-name = tk.Label(text = "Name")
-name.grid(column=0,row=1)
-year = tk.Label(text = "Year")
-year.grid(column=0,row=2)
-month = tk.Label(text = "Month")
-month.grid(column=0,row=3)
-date = tk.Label(text = "Day")
-date.grid(column=0,row=4)
-nameEntry = tk.Entry()
-nameEntry.grid(column=1,row=1)
-yearEntry = tk.Entry()
-yearEntry.grid(column=1,row=2)
-monthEntry = tk.Entry()
-monthEntry.grid(column=1,row=3)
-dateEntry = tk.Entry()
-dateEntry.grid(column=1,row=4)
+image1 = PhotoImage(file=r'C:\Users\user\Downloads\agecalc.gif')
+Label(window, image= image1).grid()
+name = Label(text="Name:")
+year = Label(text="Birth's Year(A.D.):")
+month = Label(text="Month:")
+date = Label(text="Day:")
+nameEntry = Entry()
+yearEntry = Entry()
+monthEntry = Entry()
+dateEntry = Entry()
+name.grid(column=0, row=1,sticky ="w",padx=256)
+year.grid(column=0, row=2,sticky ="w",padx=200)
+month.grid(column=0, row=3,sticky ="w",padx=253)
+date.grid(column=0, row=4,sticky ="w",padx=269)
+nameEntry.grid(column=0, row=1)
+yearEntry.grid(column=0, row=2)
+monthEntry.grid(column=0, row=3)
+dateEntry.grid(column=0, row=4)
 def getInput():
-    name=nameEntry.get()
-    monkey = Person(name,datetime.date(int(yearEntry.get()),int(monthEntry.get()),int(dateEntry.get())))
-    
-    textArea = tk.Text(master=window,height=10,width=25)
-    textArea.grid(column=1,row=6)
-    answer = " Heyy {monkey}!!!. You are {age} years old!!! ".format(monkey=name, age=monkey.age())
-    textArea.insert(tk.END,answer)
-button=tk.Button(window,text="Calculate Age",command=getInput,bg="pink")
-button.grid(column=1,row=5)
+    name = nameEntry.get()
+    Yourname = Person(name, datetime.date(int(yearEntry.get()),int(monthEntry.get()), int(dateEntry.get())))
+    textArea = Text(master=window, height=10, width=25)
+    textArea.grid(column=0, row=6)
+    answer = " !Hello *{Yourname}*!.\n !*You are {age} years old*!".format(Yourname = name, age = Yourname.age())
+    textArea.insert(END, answer)
+
+button = Button(window, text="Calculate Age", command=getInput, bg="yellow")
+button.grid(column=0, row=5, pady=10)
+
 class Person:
-    def __init__(self,name,birthdate):
+    def __init__(self, name, birthdate):
         self.name = name
         self.birthdate = birthdate
     def age(self):
         today = datetime.date.today()
-        age = today.year-self.birthdate.year
+        age = today.year - self.birthdate.year
         return age
-image=Image.open('vikas.jpeg')
-image.thumbnail((200,500),Image.ANTIALIAS)
-photo=ImageTk.PhotoImage(image)
-label_image=tk.Label(image=photo)
-label_image.grid(column=1,row=0)
 window.mainloop()
-
 
 
 
